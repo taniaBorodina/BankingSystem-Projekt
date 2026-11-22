@@ -8,8 +8,10 @@
         Background="#F1F5F9">
 
     <Grid Margin="30">
-        <StackPanel>
-            <TextBlock Text="NEXUS BANK"
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Margin="0,0,15,0">
+                <TextBlock Text="NEXUS BANK"
                        FontSize="28"
                        FontWeight="Bold"
                        Foreground="#1D4ED8"/>
@@ -74,6 +76,35 @@
 
             </StackPanel>
 
+            <!-- Zakładanie nowego konta -->
+            <TextBlock Text="Otwórz nowe konto"
+           FontSize="22"
+           FontWeight="SemiBold"
+           Margin="0,25,0,15"/>
+
+            <StackPanel Orientation="Horizontal">
+
+                <ComboBox x:Name="CurrencyComboBox"
+              Width="180"
+              Height="40"
+              SelectedIndex="0">
+                    <ComboBoxItem Content="PLN"/>
+                    <ComboBoxItem Content="EUR"/>
+                    <ComboBoxItem Content="USD"/>
+                    <ComboBoxItem Content="GBP"/>
+                </ComboBox>
+
+                <Button Content="Otwórz konto"
+            Width="150"
+            Height="40"
+            Margin="15,0,0,0"
+            Background="#1D4ED8"
+            Foreground="White"
+            Click="OpenAccountButton_Click"/>
+
+            </StackPanel>
+
+
 
             <Button Content="Wyloguj się"
                     Width="140"
@@ -81,7 +112,80 @@
                     Margin="0,25,0,0"
                     HorizontalAlignment="Left"
                     Click="LogoutButton_Click"/>
-        </StackPanel>
+
+                <!-- HISTORIA TRANSAKCJI -->
+                <TextBlock Text="Historia transakcji"
+           FontSize="22"
+           FontWeight="SemiBold"
+           Margin="0,30,0,15"/>
+
+                <DataGrid x:Name="TransactionsGrid"
+          Height="250"
+          AutoGenerateColumns="False"
+          IsReadOnly="True"
+          CanUserAddRows="False">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Data"
+                            Binding="{Binding Date, StringFormat=dd.MM.yyyy HH:mm}"
+                            Width="160"/>
+
+                        <DataGridTextColumn Header="Rodzaj operacji"
+                            Binding="{Binding Type}"
+                            Width="*"/>
+
+                        <DataGridTextColumn Header="Numer konta"
+                            Binding="{Binding AccountNumber}"
+                            Width="240"/>
+
+                        <DataGridTextColumn Header="Kwota"
+                            Binding="{Binding Amount, StringFormat=F2}"
+                            Width="120"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Button Content="Odśwież historię"
+        Width="170"
+        Height="40"
+        Margin="0,15,0,0"
+        HorizontalAlignment="Left"
+        Click="RefreshHistoryButton_Click"/>
+
+
+                <!-- KANTOR WALUTOWY -->
+                <TextBlock Text="Kantor walutowy"
+           FontSize="22"
+           FontWeight="SemiBold"
+           Margin="0,25,0,15"/>
+
+                <TextBlock Text="Konto źródłowe:" Margin="0,0,0,5"/>
+                <ComboBox x:Name="SourceAccountComboBox"
+          Height="38"
+          DisplayMemberPath="Currency"
+          Margin="0,0,0,12"/>
+
+                <TextBlock Text="Konto docelowe:" Margin="0,0,0,5"/>
+                <ComboBox x:Name="TargetAccountComboBox"
+          Height="38"
+          DisplayMemberPath="Currency"
+          Margin="0,0,0,12"/>
+
+                <TextBlock Text="Kwota do wymiany:" Margin="0,0,0,5"/>
+                <TextBox x:Name="ExchangeAmountTextBox"
+         Height="38"
+         Padding="8"
+         Margin="0,0,0,12"/>
+
+                <Button Content="Wymień walutę"
+        Width="170"
+        Height="42"
+        HorizontalAlignment="Left"
+        Background="#1D4ED8"
+        Foreground="White"
+        Click="ExchangeButton_Click"/>
+
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>
 
