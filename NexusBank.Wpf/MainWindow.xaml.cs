@@ -50,6 +50,21 @@ namespace NexusBank.Wpf
             Close();
 
         }
+
+        private void RegisterButton_Click(
+            object sender, RoutedEventArgs e)
+        {
+            RegisterWindow registerWindow = new RegisterWindow();
+
+            registerWindow.Owner = this;
+
+            registerWindow.ShowDialog();
+        }
+
+
+
     }
+
+
 
 }

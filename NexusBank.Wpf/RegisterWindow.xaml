@@ -1,0 +1,100 @@
+﻿<Window x:Class="NexusBank.Wpf.RegisterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="NexusBank - Rejestracja"
+        Height="610"
+        Width="520"
+        MinHeight="540"
+        WindowStartupLocation="CenterOwner"
+        Background="#F1F5F9">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+        <Border Background="White"
+                CornerRadius="15"
+                Margin="30"
+                Padding="30">
+
+            <StackPanel>
+
+                <TextBlock Text="NEXUS BANK"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           Foreground="#1D4ED8"
+                           HorizontalAlignment="Center"/>
+
+                <TextBlock Text="Utwórz nowe konto"
+                           FontSize="17"
+                           Foreground="#64748B"
+                           HorizontalAlignment="Center"
+                           Margin="0,10,0,30"/>
+
+                <!-- Imię i nazwisko -->
+                <TextBlock Text="Imię i nazwisko"
+                           FontWeight="SemiBold"/>
+
+                <TextBox x:Name="FullNameTextBox"
+                         Height="40"
+                         Padding="8"
+                         Margin="0,6,0,18"/>
+
+                <!-- Login -->
+                <TextBlock Text="Login"
+                           FontWeight="SemiBold"/>
+
+                <TextBox x:Name="NewLoginTextBox"
+                         Height="40"
+                         Padding="8"
+                         Margin="0,6,0,18"/>
+
+                <!-- PIN -->
+                <TextBlock Text="PIN (4 cyfry)"
+                           FontWeight="SemiBold"/>
+
+                <PasswordBox x:Name="NewPinPasswordBox"
+                             Height="40"
+                             Padding="8"
+                             MaxLength="4"
+                             Margin="0,6,0,18"/>
+
+                <!-- Potwierdzenie PIN -->
+                <TextBlock Text="Powtórz PIN"
+                           FontWeight="SemiBold"/>
+
+                <PasswordBox x:Name="ConfirmPinPasswordBox"
+                             Height="40"
+                             Padding="8"
+                             MaxLength="4"
+                             Margin="0,6,0,20"/>
+
+                <!-- Komunikaty -->
+                <TextBlock x:Name="RegisterMessageText"
+                           Foreground="#DC2626"
+                           TextWrapping="Wrap"
+                           TextAlignment="Center"
+                           Margin="0,0,0,12"/>
+
+                <!-- Przycisk rejestracji -->
+                <Button Content="ZAREJESTRUJ SIĘ"
+                        Height="45"
+                        Background="#1D4ED8"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        Cursor="Hand"
+                        Click="RegisterButton_Click"/>
+
+                <!-- Powrót -->
+                <Button Content="Powrót do logowania"
+                        Height="38"
+                        Margin="0,12,0,0"
+                        Background="Transparent"
+                        Foreground="#1D4ED8"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                        Click="BackButton_Click"/>
+
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+    </Window>
+
