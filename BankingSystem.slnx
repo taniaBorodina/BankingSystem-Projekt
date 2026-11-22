@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="BankingSystem/BankingSystem.csproj" />
   <Project Path="NexusBank.Core/NexusBank.Core.csproj" Id="534b0ac1-ffdf-4182-8864-d60f08cf697e" />
+  <Project Path="NexusBank.Wpf/NexusBank.Wpf.csproj" Id="28b4734d-db6d-4c10-857f-51287af24c35" />
 </Solution>

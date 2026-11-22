@@ -8,9 +8,15 @@ class Program
     {
         Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-        var customerManager = new DataManager<Customer>("customers.json");
-        var accountManager = new DataManager<Account>("accounts.json");
-        var transactionManager = new DataManager<Transaction>("transactions.json");
+        var customerManager = new DataManager<Customer>(
+            DataPaths.GetPath("customers.json"));
+
+        var accountManager = new DataManager<Account>(
+            DataPaths.GetPath("accounts.json"));
+
+        var transactionManager = new DataManager<Transaction>(
+            DataPaths.GetPath("transactions.json"));
+
 
         var customers = customerManager.LoadData();
         var accounts = accountManager.LoadData();
