@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 public class Account : IAccount
 {
     public string AccountNumber { get; set; } = string.Empty;
+    [JsonInclude]
     public decimal Balance { get; private set; }
     public string Currency { get; set; } = "PLN";
     public Guid CustomerId { get; set; }

@@ -7,4 +7,8 @@
 	  <Nullable>disable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\NexusBank.Core\NexusBank.Core.csproj" />
+  </ItemGroup>
+
 </Project>
