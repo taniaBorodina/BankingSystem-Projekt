@@ -114,7 +114,11 @@ namespace NexusBank.Wpf
                     $"Operacja zakończona.\nNowe saldo: {account.Balance:F2} {account.Currency}");
 
                 AmountTextBox.Clear();
+
+          
                 LoadAccounts();
+                LoadTransactions();
+
             }
             catch (Exception ex)
             {
@@ -228,7 +232,11 @@ namespace NexusBank.Wpf
                 accountManager.SaveData(accounts);
                 transactionManager.SaveData(transactions);
 
+
                 LoadAccounts();
+                LoadTransactions();
+             
+
                 ExchangeAmountTextBox.Clear();
 
                 MessageBox.Show(

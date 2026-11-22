@@ -30,9 +30,14 @@ namespace NexusBank.Wpf
 
             var customers = customerManager.LoadData();
 
+
             var customer = customers.FirstOrDefault(c =>
-                c.Login.Equals(login, StringComparison.OrdinalIgnoreCase)
-                && c.Pin == pin);
+                string.Equals(
+                    c.Login,
+                    login,
+                    StringComparison.OrdinalIgnoreCase)
+                && PinSecurity.VerifyPinOrLegacy(pin, c.Pin));
+
 
             if (customer == null)
             {
@@ -41,6 +46,13 @@ namespace NexusBank.Wpf
             }
 
             MessageText.Text = "";
+
+            if (PinSecurity.IsLegacyPin(customer.Pin))
+            {
+                customer.Pin = PinSecurity.HashPin(pin);
+                customerManager.SaveData(customers);
+            }
+
 
 
             DashboardWindow dashboard = new DashboardWindow(customer);

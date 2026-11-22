@@ -25,7 +25,14 @@ class Program
         // Dane startowe
         if (customers.Count == 0)
         {
-            var c1 = new Customer { FullName = "Jan Kowalski", Login = "jan123", Pin = "1234" };
+
+            var c1 = new Customer
+            {
+                FullName = "Jan Kowalski",
+                Login = "jan123",
+                Pin = PinSecurity.HashPin("1234")
+            };
+
             var a1 = new Account { AccountNumber = "PL93102000030000110000223344", CustomerId = c1.Id, Currency = "PLN" };
             a1.Deposit(3000.00m);
 
@@ -64,8 +71,11 @@ class Program
                 string inputPin = Console.ReadLine()?.Trim();
 
                 // Weryfikacja po loginie i pinie
+
                 var currentCustomer = customers.FirstOrDefault(c =>
-                    c.Login.Equals(inputLogin, StringComparison.OrdinalIgnoreCase) && c.Pin == inputPin);
+                    c.Login.Equals(inputLogin, StringComparison.OrdinalIgnoreCase)
+                    && PinSecurity.VerifyPinOrLegacy(inputPin ?? "", c.Pin));
+
 
                 if (currentCustomer == null)
                 {
@@ -76,6 +86,16 @@ class Program
                     Console.ReadKey();
                     continue;
                 }
+
+                if (PinSecurity.IsLegacyPin(currentCustomer.Pin))
+                {
+                    currentCustomer.Pin =
+                        PinSecurity.HashPin(inputPin!);
+
+                    customerManager.SaveData(customers);
+                }
+
+
 
                 // Sesja klienta
                 bool userSession = true;
@@ -349,7 +369,14 @@ class Program
 
                     if (!string.IsNullOrEmpty(newName) && !string.IsNullOrEmpty(newLogin) && !string.IsNullOrEmpty(newPin))
                     {
-                        var newCust = new Customer { FullName = newName, Login = newLogin, Pin = newPin };
+
+                        var newCust = new Customer
+                        {
+                            FullName = newName,
+                            Login = newLogin,
+                            Pin = PinSecurity.HashPin(newPin)
+                        };
+
                         var newAcc = new Account { AccountNumber = "PL" + new Random().Next(10000000, 99999999) + "00", CustomerId = newCust.Id, Currency = "PLN" };
                         newAcc.Deposit(500.00m);
 
@@ -360,7 +387,10 @@ class Program
                         accountManager.SaveData(accounts);
 
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine($"\nKonto utworzone! Login: {newLogin}, PIN: {newPin}");
+
+                        Console.WriteLine(
+                            $"\nKonto utworzone! Login: {newLogin}");
+
                         Console.ResetColor();
                     }
                 }

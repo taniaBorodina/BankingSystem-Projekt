@@ -86,13 +86,15 @@ namespace NexusBank.Wpf
                 }
 
                 // Tworzymy nowego klienta
+
                 Customer newCustomer = new Customer
                 {
                     Id = Guid.NewGuid(),
                     FullName = fullName,
                     Login = login,
-                    Pin = pin
+                    Pin = PinSecurity.HashPin(pin)
                 };
+
 
                 // Generujemy unikalny numer konta
                 string accountNumber;
